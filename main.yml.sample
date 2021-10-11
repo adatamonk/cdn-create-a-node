@@ -4,7 +4,7 @@ http:
       entrypoints:
         - websecure
       service: rs10
-      rule: Host(`s10.everlysucks.xyz`,`rs30.everlysucks.xyz`)
+      rule: Host(`s10.everlysucks.xyz`,`rs10.everlysucks.xyz`)
       tls: {}
     rs20:
       entrypoints:
