@@ -39,7 +39,7 @@ services:
       - "--log=true"
       - "--log.filepath=/etc/traefik/traefik.log"
       - "--log.level=ERROR"
-      - "--accesslog=true
+      - "--accesslog=true"
       - "--accesslog.filepath=/etc/traefik/access.log"
     labels:
       - "traefik.enable=true"
