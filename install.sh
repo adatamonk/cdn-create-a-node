@@ -108,10 +108,9 @@ setuptraefikfolder () {
 setupmainyml () {
     echo "Copy the SSH git repo location for your traefik configuration files"
     read -r traefikconfig_git
-    mkdir -p /opt/scripts
-    cd /opt/scripts
-    git clone "$traefikconfig_git" traefik
-    ln -s /opt/scripts/traefik/main.yml /opt/traefik/main.yml
+    mkdir -p /opt/traefik
+    cd /opt/traefik
+    git clone "$traefikconfig_git" dynamic_configs
 }
 
 setupcron () {
