@@ -24,6 +24,9 @@ services:
       - "--entryPoints.websecure.forwardedHeaders.insecure"
       - "--entryPoints.websecure.forwardedHeaders.insecure=true"
       - "--entryPoints.websecure.proxyProtocol.insecure=true"
+      - "--entrypoints.web.http.redirections.entrypoint.to=websecure"
+      - "--entrypoints.web.http.redirections.entrypoint.scheme=https"
+      - "--entrypoints.web.http.redirections.entrypoint.permanent=true" 
       # ZeroSSL Cert #
       - "--certificatesresolvers.zerossl.acme.dnschallenge.provider=cloudflare"
       - "--certificatesresolvers.zerossl.acme.dnschallenge.resolvers=1.1.1.1:53,1.0.0.1:53"
@@ -33,10 +36,11 @@ services:
       - "--certificatesresolvers.zerossl.acme.eab.hmacencoded=${zerossl_key}"
       - "--certificatesresolvers.zerossl.acme.storage=/etc/traefik/zerossl.json"
       # logging
-      - "--accesslog=true"
       - "--log=true"
       - "--log.filepath=/etc/traefik/traefik.log"
       - "--log.level=ERROR"
+      - "--accesslog=true
+      - "--accesslog.filepath=/etc/traefik/access.log"
     labels:
       - "traefik.enable=true"
       - "traefik.http.routers.traefik.entrypoints=websecure"
@@ -47,8 +51,4 @@ services:
       - "traefik.http.routers.traefik.tls.certresolver=zerossl"
       - "traefik.http.routers.traefik.middlewares=secureHeaders@file"
       - "traefik.http.middlewares.redirect-to-https.redirectscheme.scheme=https"
-      - "traefik.http.routers.traefik.service=api@internal"
-      - "traefik.http.routers.redirs.rule=hostregexp(`{host:.+}`)"
-      - "traefik.http.routers.traefik.middlewares=traefik-auth"
-      #- "traefik.http.routers.redirs.middlewares=redirect-to-https"
-    
+      - "traefik.http.routers.traefik.service=api@internal"  
