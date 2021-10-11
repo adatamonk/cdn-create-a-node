@@ -8,6 +8,13 @@ create  CDZen Nodes using docker / Traefik / ZeroSSL
 ```
 wget -q -O install.sh https://gitlab.zenterprise.org/hthighway/cdn-create-a-node/-/raw/main/install.sh
 bash ./install.sh <zerossl email> <CF email> <CF global api> <TDL> <ssh git repo for healthcheck> <name of node>
+
+examples:  
+(no health check installed)
+bash ./install.sh emailyouused@zerrssl cfemail@address asdasd876asjhasghd5asdasd fanydomainname 
+
+(with health check installed)
+bash ./install.sh emailyouused@zerrssl cfemail@address asdasd876asjhasghd5asdasd fanydomainname ssh://git@gitlab-ssh.zenterprise.org:2222/you_username/git_forhealthcheck.git 
 ```
 
 script will ask you for the git location of your main.yml file
