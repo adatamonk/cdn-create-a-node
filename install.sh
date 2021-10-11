@@ -160,7 +160,6 @@ if [ -z "$5" ]; then
     :
 else
     echo "Copy the SSH git repo location for your HealthCheck file"
-    read -r traefikconfig_git
     mkdir -p /opt/scripts
     cd /opt/scripts
     git clone "$5" health
