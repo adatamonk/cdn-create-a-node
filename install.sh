@@ -96,7 +96,6 @@ setupkernel
 setupsshkey
 setupsysctl
 setupdocker
-setupdockerenv
 setupdockercompose
 setuptraefikfolder
 
@@ -112,7 +111,7 @@ kid=$(echo "$tokens}" | grep -o 'eab_kid.*' | cut -f2- -d:)
 kid=${kid%,*}
 key=$(echo "${tokens##*:}")
 key=${key::-1}
-#remove quote
+#remove quotes
 kid="${kid%\"}"
 kid="${kid#\"}"
 key="${key%\"}"
