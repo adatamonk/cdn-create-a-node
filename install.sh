@@ -173,6 +173,7 @@ zerossl_key=${key}" > /opt/docker/.env
 if [ -z "$5" ]; then
     :
 else
+    apt install run-one
     echo "Copy the SSH git repo location for your HealthCheck file"
     mkdir -p /opt/scripts
     cd /opt/scripts
