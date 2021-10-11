@@ -21,6 +21,8 @@ script will ask you for the git location of your main.yml file
 
 so have that created before running the script
 
+there is a smaple file in this repo `main.yml.sample`
+
 ------------------------------------------------------------
 
 if you want to install the health check script you will need to have a fully edited version of it ready in it's own git repo
