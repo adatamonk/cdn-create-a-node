@@ -10,9 +10,15 @@ wget -q -O install.sh https://gitlab.zenterprise.org/hthighway/cdn-create-a-node
 bash ./install.sh <zerossl email> <CF email> <CF global api> <TDL> <ssh git repo for healthcheck> <name of node>
 ```
 
-script will ask you for the git location of your main.yml file and the git location of your fully editted healthcheck git
+script will ask you for the git location of your main.yml file
 
 so have that created before running the script
+
+------------------------------------------------------------
+
+if you want to install the health check script you will need to have a fully edited version of it ready in it's own git repo
+
+then  provde it's ssh git and node name for <ssh git repo for healthcheck> <name of node> above
 
 ------------------------------------------------------------
 
