@@ -14,7 +14,7 @@ examples:
 bash ./install.sh emailyouused@zerrssl cfemail@address asdasd876asjhasghd5asdasd fanydomainname 
 
 (with health check installed)
-bash ./install.sh emailyouused@zerrssl cfemail@address asdasd876asjhasghd5asdasd fanydomainname ssh://git@gitlab-ssh.zenterprise.org:2222/you_username/git_forhealthcheck.git 
+bash ./install.sh emailyouused@zerrssl cfemail@address asdasd876asjhasghd5asdasd fanydomainname ssh://git@gitlab-ssh.zenterprise.org:2222/ you_username/git_forhealthcheck.git UKNODE
 ```
 
 script will ask you for the git location of your main.yml file
