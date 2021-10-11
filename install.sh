@@ -102,6 +102,13 @@ setupmainyml () {
     ln -s /opt/scripts/traefik/main.yml /opt/traefik/main.yml
 }
 
+setupcron () {
+    crontab -l > /tmp/mycron
+    echo '*/5 * * * * cd /opt/scripts/traefix &&  git pull >/dev/null 2>&1' >> /tmp/mycron
+    crontab /tmp/mycron
+    rm /tmp/mycron
+}
+
 
 setupkernel
 setupsshkey
@@ -109,8 +116,8 @@ setupsysctl
 setupdocker
 setupdockercompose
 setuptraefikfolder
-
-
+setupmainyml
+setupcron
 
 #  setup zeroSLL eab credetials 
 #  define CF email and global token
