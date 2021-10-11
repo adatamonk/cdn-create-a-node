@@ -3,8 +3,8 @@
 # $2 = CF email
 # $3 = CF Global Token
 # $4 = TDL
-# 
-#
+# $5 = ssh git location of your healthcheck script
+# $6 = Node Name
 setupsshkey () {
 hostname=$(uname -n) 
 ssh-keygen -o -a 100 -t ed25519 -f /root/.ssh/id_ed25519 -C "$hostname" 
@@ -89,6 +89,14 @@ setupdockercompose () {
     wget -q -O docker-compose.yml https://gitlab.zenterprise.org/hthighway/cdn-create-a-node/-/raw/main/docker-compose.yml
 }
 
+copyhealthcheck () {
+    echo "Copy the sample healthcheck to /opt/scripts"
+    mkdir -p /opt/scripts
+    cd /opt/scripts
+    wget -q -O cdn-node-healthcheck.sh.sample https://gitlab.zenterprise.org/hthighway/cdn-create-a-node/-/raw/main/cdn-node-healthcheck.sh.sample
+}
+
+
 setuptraefikfolder () {
     echo "Copy the dynamic.yml to /opt/traefik"
     mkdir -p /opt/traefik
@@ -145,4 +153,22 @@ TLD=$4
 zerossl_email=$1
 zerossl_kid=${kid}
 zerossl_key=${key}" > /opt/docker/.env
+
+
+
+if [ -z "$5" ]; then
+    :
+else
+    echo "Copy the SSH git repo location for your traefik configuration files"
+    read -r traefikconfig_git
+    mkdir -p /opt/scripts
+    cd /opt/scripts
+    git clone "$5" health
+
+    crontab -l > /tmp/mycron
+    echo '*/5 * * * * cd /opt/scripts/health &&  git pull >/dev/null 2>&1' >> /tmp/mycron
+    echo '*/1 * * * * run-one /bin/bash /opt/scripts/health/healthcheck.sh $6 $4 > /dev/null 2>&1' >> /tmp/cron
+    crontab /tmp/mycron
+    rm /tmp/mycron
+fi
 
