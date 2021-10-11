@@ -99,8 +99,8 @@ copyhealthcheck () {
 
 setuptraefikfolder () {
     echo "Copy the dynamic.yml to /opt/traefik"
-    mkdir -p /opt/traefik
-    cd /opt/traefik
+    mkdir -p /opt/traefik/dynamic_configs
+    cd /opt/traefik/dynamic_configs
     wget -q -O dynamic.yml https://gitlab.zenterprise.org/hthighway/cdn-create-a-node/-/raw/main/dynamic.yml
 }
 
@@ -126,8 +126,8 @@ setupsshkey
 setupsysctl
 setupdocker
 setupdockercompose
-setuptraefikfolder
 setupmainyml
+setuptraefikfolder
 setupcron
 
 #  setup zeroSLL eab credetials 
