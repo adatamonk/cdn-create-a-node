@@ -116,7 +116,7 @@ setupmainyml () {
 
 setupcron () {
     crontab -l > /tmp/mycron
-    echo '*/5 * * * * cd /opt/scripts/traefix &&  git pull >/dev/null 2>&1' >> /tmp/mycron
+    echo '*/5 * * * * cd /opt/scripts/traefik &&  git pull >/dev/null 2>&1' >> /tmp/mycron
     crontab /tmp/mycron
     rm /tmp/mycron
 }
