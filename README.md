@@ -29,7 +29,7 @@ if you want to install the health check script you will need to have a fully edi
 
 then provde it's ssh git and node name for <ssh git repo for healthcheck> <name of node> above
 
-there is a sample healthcheck in this repo `cdn-node-healthcheck.sh.sample`
+there is a sample healthcheck in this repo `healthcheck.sh.sample`
 
 ------------------------------------------------------------
 What Hasppens:
