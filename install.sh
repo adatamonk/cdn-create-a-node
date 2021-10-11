@@ -78,32 +78,6 @@ net.core.netdev_budget_usecs=5000" > /etc/sysctl.conf
 #
 #
 
-
-#  setup zeroSLL eab credetials 
-#  define CF email and global token
-#  set TDL
-#  all in  /opt/docker/.env
-#
-setupdockerenv () {
-mkdir -p /opt/docker
-
-tokens=$(curl -Ss https://api.zerossl.com/acme/eab-credentials-email --data "email=${1}")
-kid=$(echo "$tokens}" | grep -o 'eab_kid.*' | cut -f2- -d:)
-kid=${kid%,*}
-key=$(echo "${tokens##*:}")
-key=${key::-1}
-echo "using ${key} : ${kid}"
-echo "CLOUDFLARE_EMAIL=${2}
-CLOUDFLARE_API_KEY=${3}
-TDL=${4}
-zerossl_email=${1}
-zerossl_kid=${kid}
-zerosssl_key=${key}" > /opt/docker/.env
-
-}
-
-
-
 setupdockercompose () {
     echo "Copy the docker-compose.yml to /opt/docker"
     mkdir -p /opt/docker
@@ -125,3 +99,29 @@ setupdocker
 setupdockerenv
 setupdockercompose
 setuptraefikfolder
+
+
+
+#  setup zeroSLL eab credetials 
+#  define CF email and global token
+#  set TDL
+#  all in  /opt/docker/.env
+mkdir -p /opt/docker
+tokens=$(curl -Ss "https://api.zerossl.com/acme/eab-credentials-email" --data "email=$1")
+kid=$(echo "$tokens}" | grep -o 'eab_kid.*' | cut -f2- -d:)
+kid=${kid%,*}
+key=$(echo "${tokens##*:}")
+key=${key::-1}
+#remove quote
+kid="${kid%\"}"
+kid="${kid#\"}"
+key="${key%\"}"
+key="${key#\"}"
+
+echo "CLOUDFLARE_EMAIL=$2
+CLOUDFLARE_API_KEY=$3
+TDL=$4
+zerossl_email=$1
+zerossl_kid=${kid}
+zerosssl_key=${key}" > /opt/docker/.env
+
