@@ -99,6 +99,7 @@ setupmainyml () {
     mkdir -p /opt/scripts
     cd /opt/scripts
     git clone "$traefikconfig_git" traefik
+    ln -s /opt/scripts/traefik/main.yml /opt/traefik/main.yml
 }
 
 
