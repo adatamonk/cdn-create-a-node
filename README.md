@@ -32,12 +32,15 @@ then provde it's ssh git and node name for <ssh git repo for healthcheck> <name 
 there is a sample healthcheck in this repo `cdn-node-healthcheck.sh.sample`
 
 ------------------------------------------------------------
+What Hasppens:
 
-Updated kernel
+Updated kernel installed
 
-updates sysctl
+updates sysctl using ZenDC standards
 
 installs docker-ce using `sh get-docker.sh`
+
+installs docker-compose
 
 populates a /opt/docker/.env file with - 
 -    CF email
@@ -54,3 +57,5 @@ populates /opt/traefik/dynamic_configs/dynamic.yml
 grabs your main.yml from your gitlab and clones it to /opt/traefik/dynamic_configs/main.yml
 
 adds a cronb job to keep main.yml updated
+
+and if you chose, it will install your healthcheck and add a cron job for it
