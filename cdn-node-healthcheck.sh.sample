@@ -45,7 +45,7 @@ do
                   --text "${SERVERNAME[${i}]} is not responding through the ${1} node"
                 fi
                 # restart traefix
-                /bin/systemctl restart traefik.service
+                /usr/bin/docker restart traefik
             fi
         fi
     else
