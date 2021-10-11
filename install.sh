@@ -169,7 +169,7 @@ else
     rm /tmp/mycron
 
     crontab -l > /tmp/mycron
-    echo '*/1 * * * * run-one /bin/bash /opt/scripts/health/healthcheck.sh $6 $4 > /dev/null 2>&1' >> /tmp/cron
+    echo '*/1 * * * * run-one /bin/bash /opt/scripts/health/healthcheck.sh $6 $4 > /dev/null 2>&1' >> /tmp/mycron
     crontab /tmp/mycron
     rm /tmp/mycron
 fi
