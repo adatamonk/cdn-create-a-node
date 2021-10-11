@@ -108,14 +108,14 @@ setupdockercompose () {
     echo "Copy the docker-compose.yml to /opt/docker"
     mkdir -p /opt/docker
     cd /opt/docker
-    wget -q -O- https://gitlab.zenterprise.org/hthighway/cdn-create-a-node/-/raw/main/docker-compose.yml
+    wget -q -O docker-compose.yml https://gitlab.zenterprise.org/hthighway/cdn-create-a-node/-/raw/main/docker-compose.yml
 }
 
 setuptraefikfolder () {
     echo "Copy the dynamic.yml to /opt/traefik"
     mkdir -p /opt/traefik
     cd /opt/traefik
-    wget -q -O- https://gitlab.zenterprise.org/hthighway/cdn-create-a-node/-/raw/main/dynamic.yml
+    wget -q -O dynamic.yml https://gitlab.zenterprise.org/hthighway/cdn-create-a-node/-/raw/main/dynamic.yml
 }
 
 setupkernel
