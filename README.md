@@ -17,17 +17,24 @@ so have that created before running the script
 ------------------------------------------------------------
 
 Updated kernel
+
 updates sysctl
+
 installs docker-ce using `sh get-docker.sh`
+
 populates a /opt/docker/.env file with - 
-   CF email
-   CF Global API key
-   ZerroSSL email
-   ZeroSLL eab_kid
-   ZeroSSL eab_key
-   ZeroSSl email
-   TDL
+-    CF email
+-    CF Global API key
+-    ZerroSSL email
+-    ZeroSLL eab_kid
+-    ZeroSSL eab_key
+-    ZeroSSl email
+-    TDL
+
 populates /opt/docker/docker-compose.yml
+
 populates /opt/traefik/dynamic.yml
+
 grabs your main.yml from your gitlab and symlinks it to /opt/traefik/main.yml
+
 adds a cronb job to keep main.yml updated
