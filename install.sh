@@ -159,7 +159,7 @@ zerossl_key=${key}" > /opt/docker/.env
 if [ -z "$5" ]; then
     :
 else
-    echo "Copy the SSH git repo location for your HEalthCheck file"
+    echo "Copy the SSH git repo location for your HealthCheck file"
     read -r traefikconfig_git
     mkdir -p /opt/scripts
     cd /opt/scripts
@@ -176,7 +176,15 @@ else
     #rm /tmp/mycron
 fi
 
-
+echo "=========================================="
+echo "=========================================="
+echo "=========================================="
+echo "=========================================="
 echo "install is complete"
 echo "go to /opt/docker"
 echo "and start docker-compose"
+echo "."
+echo "."
+echo "=========================================="
+echo "=========================================="
+echo "=========================================="
