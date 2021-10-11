@@ -25,8 +25,9 @@ so have that created before running the script
 
 if you want to install the health check script you will need to have a fully edited version of it ready in it's own git repo
 
-then  provde it's ssh git and node name for <ssh git repo for healthcheck> <name of node> above
+then provde it's ssh git and node name for <ssh git repo for healthcheck> <name of node> above
 
+(there is a sample healthcheck in this repo `cdn-node-healthcheck.sh.sample`)
 ------------------------------------------------------------
 
 Updated kernel
