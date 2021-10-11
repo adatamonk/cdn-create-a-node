@@ -115,7 +115,7 @@ setupmainyml () {
 
 setupcron () {
     crontab -l > /tmp/mycron
-    echo '*/5 * * * * cd /opt/scripts/traefik &&  git pull >/dev/null 2>&1' >> /tmp/mycron
+    echo '*/5 * * * * cd /opt/traefik/dynamic_configs &&  git pull >/dev/null 2>&1' >> /tmp/mycron
     crontab /tmp/mycron
     rm /tmp/mycron
 }
@@ -168,10 +168,10 @@ else
     crontab /tmp/mycron
     rm /tmp/mycron
 
-    #crontab -l > /tmp/mycron
-    #echo '*/1 * * * * run-one /bin/bash /opt/scripts/health/healthcheck.sh $6 $4 > /dev/null 2>&1' >> /tmp/cron
-    #crontab /tmp/mycron
-    #rm /tmp/mycron
+    crontab -l > /tmp/mycron
+    echo '*/1 * * * * run-one /bin/bash /opt/scripts/health/healthcheck.sh $6 $4 > /dev/null 2>&1' >> /tmp/cron
+    crontab /tmp/mycron
+    rm /tmp/mycron
 fi
 
 echo "=========================================="
