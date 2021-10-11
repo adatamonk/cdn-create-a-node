@@ -17,7 +17,7 @@ services:
       CLOUDFLARE_API_KEY: "${CLOUDFLARE_API_KEY}"
     command:
       - "--global.sendanonymoususage=false"
-      - "--providers.file.directory=/etc/traefik"
+      - "--providers.file.directory=/etc/traefik/dynamic_configs"  
       - "--providers.docker=true"
       - "--providers.docker.exposedbydefault=false"
       - "--entrypoints.websecure.address=:443"
