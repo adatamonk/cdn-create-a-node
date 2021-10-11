@@ -1,0 +1,54 @@
+ersion: "3.7"
+services:
+# system
+  traefik:
+    image: "traefik:latest"
+    container_name: traefik
+    restart: always
+    volumes:
+      - "/var/run/docker.sock:/var/run/docker.sock:ro"
+      - "/opt/traefik:/etc/traefik"
+    ports:
+      - "443:443"
+      - "8080:8080"
+      - "80:80"
+    environment:
+      CLOUDFLARE_EMAIL: "${CLOUDFLARE_EMAIL}"
+      CLOUDFLARE_API_KEY: "${CLOUDFLARE_API_KEY}"
+    command:
+      - "--global.sendanonymoususage=false"
+      - "--providers.file.directory=/etc/traefik"
+      - "--providers.docker=true"
+      - "--providers.docker.exposedbydefault=false"
+      - "--entrypoints.websecure.address=:443"
+      - "--entryPoints.websecure.forwardedHeaders.insecure"
+      - "--entryPoints.websecure.forwardedHeaders.insecure=true"
+      - "--entryPoints.websecure.proxyProtocol.insecure=true"
+      # ZeroSSL Cert #
+      - "--certificatesresolvers.zerossl.acme.dnschallenge.provider=cloudflare"
+      - "--certificatesresolvers.zerossl.acme.dnschallenge.resolvers=1.1.1.1:53,1.0.0.1:53"
+      - "--certificatesresolvers.zerossl.acme.email=${zerossl_email}"
+      - "--certificatesresolvers.zerossl.acme.caserver=https://acme.zerossl.com/v2/DV90"
+      - "--certificatesresolvers.zerossl.acme.eab.kid=${zerossl_kid}"
+      - "--certificatesresolvers.zerossl.acme.eab.hmacencoded=${zerossl_key}"
+      - "--certificatesresolvers.zerossl.acme.storage=/etc/traefik/zerossl.json"
+      # logging
+      - "--accesslog=true"
+      - "--log=true"
+      - "--log.filepath=/etc/traefik/traefik.log"
+      - "--log.level=ERROR"
+    labels:
+      - "traefik.enable=true"
+      - "traefik.http.routers.traefik.entrypoints=websecure"
+      - "traefik.http.routers.traefik.tls=true"
+      - "traefik.http.routers.traefik.tls.options=securetls@file"
+      - "traefik.http.routers.traefik.tls.domains[0].main=${TLD}"
+      - "traefik.http.routers.traefik.tls.domains[0].sans=*.${TLD}"
+      - "traefik.http.routers.traefik.tls.certresolver=zerossl"
+      - "traefik.http.routers.traefik.middlewares=secureHeaders@file"
+      - "traefik.http.middlewares.redirect-to-https.redirectscheme.scheme=https"
+      - "traefik.http.routers.traefik.service=api@internal"
+      - "traefik.http.routers.redirs.rule=hostregexp(`{host:.+}`)"
+      - "traefik.http.routers.traefik.middlewares=traefik-auth"
+      #- "traefik.http.routers.redirs.middlewares=redirect-to-https"
+    
