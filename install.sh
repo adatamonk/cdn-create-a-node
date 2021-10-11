@@ -92,6 +92,16 @@ setuptraefikfolder () {
     wget -q -O dynamic.yml https://gitlab.zenterprise.org/hthighway/cdn-create-a-node/-/raw/main/dynamic.yml
 }
 
+
+setupmainyml () {
+    echo "Copy the SSH git repo location for your traefik configuration files"
+    read -r traefikconfig_git
+    mkdir -p /opt/scripts
+    cd /opt/scripts
+    git clone "$traefikconfig_git" traefik
+}
+
+
 setupkernel
 setupsshkey
 setupsysctl
