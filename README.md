@@ -45,13 +45,12 @@ populates a /opt/docker/.env file with -
 -    ZerroSSL email
 -    ZeroSLL eab_kid
 -    ZeroSSL eab_key
--    ZeroSSl email
 -    TDL
 
 populates /opt/docker/docker-compose.yml
 
-populates /opt/traefik/dynamic.yml
+populates /opt/traefik/dynamic_configs/dynamic.yml
 
-grabs your main.yml from your gitlab and symlinks it to /opt/traefik/main.yml
+grabs your main.yml from your gitlab and clones it to /opt/traefik/dynamic_configs/main.yml
 
 adds a cronb job to keep main.yml updated
