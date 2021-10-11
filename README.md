@@ -6,7 +6,7 @@ create  CDZen Nodes using docker / Traefik / ZeroSSL
 ## How To Install
 
 ```
-wget -q -O- https://gitlab.zenterprise.org/hthighway/cdn-create-a-node/-/raw/main/install.sh
+wget -q -O- https://gitlab.zenterprise.org/hthighway/cdn-create-a-node/-/raw/main/install.sh > install.sh
 bash ./install.sh <zerossl email> <CF email> <CF global api key> <TDL>
 ```
 
