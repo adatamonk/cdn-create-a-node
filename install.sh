@@ -141,8 +141,8 @@ key="${key#\"}"
 
 echo "CLOUDFLARE_EMAIL=$2
 CLOUDFLARE_API_KEY=$3
-TDL=$4
+TLD=$4
 zerossl_email=$1
 zerossl_kid=${kid}
-zerosssl_key=${key}" > /opt/docker/.env
+zerossl_key=${key}" > /opt/docker/.env
 
