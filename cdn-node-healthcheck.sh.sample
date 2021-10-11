@@ -1,0 +1,64 @@
+#!/bin/bash
+#  $1 = NODE name
+#  $2 domain name
+#  $3 send Discord message yes/no
+#
+#  ./healthcheck.sh UK1 4dudesmedia.xyz yes
+#
+#  This is to be run from a CDN node
+#
+#  The 1st curl command checks if the Plex/indentity LB URL returns correctly
+#  if the curl command retuns an error then the next curl command check is the Plex/indentity DIRECT URL returns correctly
+#  if that returns true, it means plex is working and the issue is with the NODE.
+#  so restart traefik on the NODE
+#  if the DIRECT URL returns with an error, do not restart traefik on the NODE as it's an issue with the ZenDC box
+
+LBNAME[1]="s01"
+LBNAME[2]="s02"
+
+DIRECT[1]="rs01"
+DIRECT[2]="rs02"
+
+SERVERNAME[1]="Riggs"
+SERVERNAME[2]="Murtaugh"
+
+REPOSRC="https://github.com/ChaoticWeg/discord.sh.git"
+
+WEBHOOK[1]="https://discord.com/api/webhooks/[ disord HOOK INFO ]"
+WEBHOOK[2]="https://discord.com/api/webhooks/[ disord HOOK INFO ]"
+
+if hash jq 2> /dev/null; then echo "OK, you have jq installed. We will use that."; else sudo apt install jq -y; fi
+
+for i in "${!LBNAME[@]}"; 
+do 
+    curl --connect-timeout 15 --silent --show-error --fail "https://${LBNAME[${i}]}.${2}/identity"
+    if [ $? -ne 0 ]; then
+       curl --connect-timeout 15 --silent --show-error --fail "https://${DIRECT[${i}]}.${2}/identity"
+        if [ $? -eq 0 ]; then
+            if [ ! -f "/tmp/${LBNAME[${i}]}.txt" ]; then
+                touch "/tmp/${LBNAME[${i}]}.txt"
+                if [ "${3}" -eq "yes"]; then
+                  [ -d "/opt/discord.sh" ] || git clone $REPOSRC "/opt/discord.sh/"
+                  /opt/discord.sh/discord.sh \
+                  --webhook-url="${WEBHOOK[${i}]}" \
+                  --username "CDN-Bot" \
+                  --text "${SERVERNAME[${i}]} is not responding through the ${1} node"
+                fi
+                # restart traefix
+                /bin/systemctl restart traefik.service
+            fi
+        fi
+    else
+        echo "${SERVERNAME[${i}]} responded healthy"
+        if [ -f "/tmp/${LBNAME[${i}]}.txt" ]; then
+            rm "/tmp/${LBNAME[${i}]}.txt"
+            if [ "${3}" -eq "yes"]; then
+                [ -d "/opt/discord.sh" ] || git clone $REPOSRC "/opt/discord.sh/"
+                /opt/discord.sh/discord.sh \
+                --webhook-url="${WEBHOOK[${i}]}" \
+                --username "CDN-Bot" \
+                --text "${SERVERNAME[${i}]} is back online through the ${1} node"
+            fi
+        fi 
+    fi
+done
