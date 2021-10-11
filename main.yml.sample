@@ -1,0 +1,24 @@
+http:
+  routers:
+    rs10:
+      entrypoints:
+        - websecure
+      service: rs10
+      rule: Host(`s10.everlysucks.xyz`,`rs30.everlysucks.xyz`)
+      tls: {}
+    rs20:
+      entrypoints:
+        - websecure
+      service: rs20
+      rule: Host(`s20.everlysucks.xyz`,`rs20everlysucks.xyz`)
+      tls: {}
+  services:
+    rs10:
+      loadBalancer:
+        servers:
+        - url: "https://rs10.everlysucks.xyz"
+    rs20:
+      loadBalancer:
+        servers:
+        - url: "https://rs20.everlysucks.xyz"
+ 
