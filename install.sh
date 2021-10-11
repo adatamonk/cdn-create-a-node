@@ -83,14 +83,14 @@ net.core.netdev_budget_usecs=5000" > /etc/sysctl.conf
 #
 
 setupdockercompose () {
-    echo "Copy the docker-compose.yml to /opt/docker"
+    echo "created and placed the docker-compose.yml to /opt/docker"
     mkdir -p /opt/docker
     cd /opt/docker
     wget -q -O docker-compose.yml https://gitlab.zenterprise.org/hthighway/cdn-create-a-node/-/raw/main/docker-compose.yml
 }
 
 copyhealthcheck () {
-    echo "Copy the sample healthcheck to /opt/scripts"
+    echo "Copied the sample healthcheck to /opt/scripts"
     mkdir -p /opt/scripts
     cd /opt/scripts
     wget -q -O cdn-node-healthcheck.sh.sample https://gitlab.zenterprise.org/hthighway/cdn-create-a-node/-/raw/main/cdn-node-healthcheck.sh.sample
@@ -98,7 +98,7 @@ copyhealthcheck () {
 
 
 setuptraefikfolder () {
-    echo "Copy the dynamic.yml to /opt/traefik"
+    echo "Copied the dynamic.yml to /opt/traefik/dynamic_configs"
     mkdir -p /opt/traefik/dynamic_configs
     cd /opt/traefik/dynamic_configs
     wget -q -O dynamic.yml https://gitlab.zenterprise.org/hthighway/cdn-create-a-node/-/raw/main/dynamic.yml
@@ -106,7 +106,7 @@ setuptraefikfolder () {
 
 
 setupmainyml () {
-    echo "Copy the SSH git repo location for your traefik configuration files"
+    echo "Copied the SSH git repo location for your main.yml to /opt/traefik/dynamic_configs"
     read -r traefikconfig_git
     mkdir -p /opt/traefik
     cd /opt/traefik
