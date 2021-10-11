@@ -92,14 +92,14 @@ kid=$(echo "$tokens}" | grep -o 'eab_kid.*' | cut -f2- -d:)
 kid=${kid%,*}
 key=$(echo "${tokens##*:}")
 key=${key::-1}
-
+echo "using ${key} : ${kid}"
 echo "CLOUDFLARE_EMAIL=${2}
 CLOUDFLARE_API_KEY=${3}
 TDL=${4}
 zerossl_email=${1}
 zerossl_kid=${kid}
 zerosssl_key=${key}" > /opt/docker/.env
-####
+
 }
 
 
