@@ -21,7 +21,7 @@ script will ask you for the git location of your main.yml file
 
 so have that created before running the script
 
-there is a smaple file in this repo `main.yml.sample`
+there is a sample file in this repo `main.yml.sample`
 
 ------------------------------------------------------------
 
