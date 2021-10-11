@@ -111,6 +111,16 @@ setupmainyml () {
     mkdir -p /opt/traefik
     cd /opt/traefik
     git clone "$traefikconfig_git" dynamic_configs
+
+
+    FILE=/opt/traefik/dynamic_configs/main.yml
+    if [ -f "$FILE" ]; then
+        fcheck=0
+    else 
+        echo "$FILE does not exist, please make sure you provided a correct git ssh url and you type YES to accept the clone"
+        fcheck=1
+        rm -rf /opt/traefik/dynamic_configs
+    fi
 }
 
 setupcron () {
@@ -127,6 +137,11 @@ setupsysctl
 setupdocker
 setupdockercompose
 setupmainyml
+if [ ${fcheck} -eq 0 ]; then 
+    :
+else
+    setupmainyml  
+fi
 setuptraefikfolder
 setupcron
 
