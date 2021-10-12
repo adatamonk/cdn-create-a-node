@@ -1,0 +1,12 @@
+#!/bin/bash
+#<UDF name="ZEROSSL_EMAIL" label="ZEROSSL EMAIL">
+#<UDF name="CF_EMAIL" label="CF EMAIL">
+#<UDF name="CF_API" label="CF API">
+#<UDF name="TDL" label="TDL">
+#<UDF name="NODENAME" label="NODENAME">
+
+HEALTH="https://<username>:<access token>@gitlab.zenterprise.org/<username>/your_healthcheck_script.git"
+MAINYML="https://<username>:<access token>@gitlab.zenterprise.org/<username>/your_main.yml_file.git"
+
+wget -q -O install.sh https://gitlab.zenterprise.org/hthighway/cdn-create-a-node/-/raw/main/install_stackscripts.sh
+/bin/bash install.sh ${ZEROSSL_EMAIL} ${CF_EMAIL} ${CF_API} ${TDL} ${NODENAME} ${HEALTH} ${MAINYML}
