@@ -9,6 +9,10 @@
 # $5 = ssh git location of your healthcheck script
 # $6 = Node Name
 # $7 = main.yml ssh git url
+
+healthurl="${5}"
+mainyml="${7}"
+
 setuphostcheck () {
     mkdir -p /root/.ssh
     echo "Host gitlab.zenterprise.org
@@ -120,7 +124,7 @@ setupmainyml () {
     #read -r traefikconfig_git
     mkdir -p /opt/traefik
     cd /opt/traefik
-    git -c http.sslVerify=false clone "$7" dynamic_configs
+    git -c http.sslVerify=false clone "$mainyml" dynamic_configs
 
     FILE=/opt/traefik/dynamic_configs/main.yml
     if [ -f "$FILE" ]; then
