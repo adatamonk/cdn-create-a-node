@@ -120,8 +120,7 @@ setupmainyml () {
     #read -r traefikconfig_git
     mkdir -p /opt/traefik
     cd /opt/traefik
-    git clone "$7" dynamic_configs
-
+    git -c http.sslVerify=false clone "$7" dynamic_configs
 
     FILE=/opt/traefik/dynamic_configs/main.yml
     if [ -f "$FILE" ]; then
@@ -187,7 +186,7 @@ else
     echo "Copy the SSH git repo location for your HealthCheck file"
     mkdir -p /opt/scripts
     cd /opt/scripts
-    git clone "$5" health
+    git -c http.sslVerify=false clone "$5" health
 
     crontab -l > /tmp/mycron
     echo '*/5 * * * * cd /opt/scripts/health &&  git pull >/dev/null 2>&1' >> /tmp/mycron
