@@ -145,7 +145,7 @@ setupzerossl () {
     echo "CLOUDFLARE_EMAIL=${cfemail}
     CLOUDFLARE_API_KEY=${cfapi}
     TLD=${domain}
-    zerossl_email=$zerosslemail
+    zerossl_email=${zerosslemail}
     zerossl_kid=${kid}
     zerossl_key=${key}" > /opt/docker/.env
 }
