@@ -143,7 +143,7 @@ setupzerossl () {
     key="${key#\"}"
 
     echo "CLOUDFLARE_EMAIL=${cfemail}
-    CLOUDFLARE_API_KEY=$(cfapi)
+    CLOUDFLARE_API_KEY=${cfapi}
     TLD=${domain}
     zerossl_email=$zerosslemail
     zerossl_kid=${kid}
