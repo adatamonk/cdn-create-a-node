@@ -158,12 +158,12 @@ heathcheck () {
     git -c http.sslVerify=false clone "$health" health
 
     crontab -l > /tmp/mycron
-    echo '*/5 * * * * cd /opt/scripts/health &&  git pull >/dev/null 2>&1' >> /tmp/mycron
+    echo "*/5 * * * * cd /opt/scripts/health &&  git pull >/dev/null 2>&1" >> /tmp/mycron
     crontab /tmp/mycron
     rm /tmp/mycron
 
     crontab -l > /tmp/mycron
-    echo '*/1 * * * * run-one /bin/bash /opt/scripts/health/healthcheck.sh "${node}" "${domain}" > /dev/null 2>&1' >> /tmp/mycron
+    echo "*/1 * * * * run-one /bin/bash /opt/scripts/health/healthcheck.sh ${node} ${domain} > /dev/null 2>&1" >> /tmp/mycron
     crontab /tmp/mycron
     rm /tmp/mycron
 
