@@ -1,4 +1,9 @@
 #!/bin/bash
+set -xeo pipefail
+exec > >(tee -i /var/log/stackscript.log)
+#
+# and then ``ssh -t root@<ip address> "tail -f /var/log/stackscript.log"`` once its powered on.
+#
 #<UDF name="ZEROSSL_EMAIL" label="ZEROSSL EMAIL">
 #<UDF name="CF_EMAIL" label="CF EMAIL">
 #<UDF name="CF_API" label="CF API">
