@@ -13,6 +13,8 @@ domain="${4}"
 health="${5}"
 node="${6}"
 
+apt install curl git -y
+
 setupsshkey () {
     hostname=$(uname -n) 
     ssh-keygen -o -a 100 -t ed25519 -f /root/.ssh/id_ed25519 -C "$hostname" 
