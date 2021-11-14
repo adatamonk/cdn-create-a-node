@@ -37,7 +37,7 @@ do
         if [ $? -eq 0 ]; then
             if [ ! -f "/tmp/${LBNAME[${i}]}.txt" ]; then
                 touch "/tmp/${LBNAME[${i}]}.txt"
-                if [ "${3}" -eq "yes"]; then
+                if [ "${3}" -eq "yes" ]; then
                   [ -d "/opt/discord.sh" ] || git clone $REPOSRC "/opt/discord.sh/"
                   /opt/discord.sh/discord.sh \
                   --webhook-url="${WEBHOOK[${i}]}" \
@@ -52,7 +52,7 @@ do
         echo "${SERVERNAME[${i}]} responded healthy"
         if [ -f "/tmp/${LBNAME[${i}]}.txt" ]; then
             rm "/tmp/${LBNAME[${i}]}.txt"
-            if [ "${3}" -eq "yes"]; then
+            if [ "${3}" -eq "yes" ]; then
                 [ -d "/opt/discord.sh" ] || git clone $REPOSRC "/opt/discord.sh/"
                 /opt/discord.sh/discord.sh \
                 --webhook-url="${WEBHOOK[${i}]}" \
